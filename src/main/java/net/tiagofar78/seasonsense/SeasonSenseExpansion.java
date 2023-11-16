@@ -19,10 +19,15 @@ public class SeasonSenseExpansion extends PlaceholderExpansion implements Config
 
 	@Override
 	public Map<String, Object> getDefaults() {
-		_defaults.put("Seasons.Winter", "Winter");
-		_defaults.put("Seasons.Summer", "Summer");
-		_defaults.put("Seasons.Spring", "Spring");
-		_defaults.put("Seasons.Fall", "Fall");		
+		String winterString = this.getString("Seasons.Winter", "Winter");
+		String summerString = this.getString("Seasons.Summer", "Summer");
+		String springString = this.getString("Seasons.Spring", "Spring");
+		String fallString = this.getString("Seasons.Fall", "Fall");
+		
+		_defaults.put("Seasons.Winter", winterString);
+		_defaults.put("Seasons.Summer", summerString);
+		_defaults.put("Seasons.Spring", springString);
+		_defaults.put("Seasons.Fall", fallString);		
 		
 		return _defaults;
 	}
@@ -44,8 +49,8 @@ public class SeasonSenseExpansion extends PlaceholderExpansion implements Config
 	
 	@Override
 	public String onPlaceholderRequest(Player p, String identifier) {
-		if (identifier.equalsIgnoreCase("seasonsense")) {
-			return getSeason();
+		if (identifier.equalsIgnoreCase("season")) {
+			return (String) _defaults.get("Seasons." + getSeason());
 		}
 		
 		return null;
